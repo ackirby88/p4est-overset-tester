@@ -39,11 +39,11 @@ void driver_t::initialize(int argc,char **argv){
     flow->initialize();
 
     /* get pointers from flow solver */
-    flow->flow_set_pointers();
+    flow->flow_set_pointers(group_index);
 
     /* initialize p4est_overset: p4est bg mesh must be group_index=0 */
     p4est_overset->p4est_overset_init(mpicomm,leader_comm,group_comm,
-                                      group_index,group_index,
+                                      group_index,ngroups,
                                       mesh_rank_offsets,
                                       flow->p4est,
                                       flow->qpoints);
